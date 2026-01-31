@@ -36,6 +36,8 @@ def logstashLogbackEncoderVersion = '9.0'
 def bouncycastleVersion = '1.79'
 def igniteVersion = '3.1.0'
 
+def dir = layout.buildDirectory
+
 dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -79,6 +81,60 @@ dependencyManagement {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.14"
+}
+
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
+
+def filteredClassDirs = {
+    FileCollection classDirs, List<String> excludes ->
+        files(classDirs.collect{
+            d ->
+                fileTree(dir: d, exclude: excludes)
+        })
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = dir.dir('jacoco')
+    }
+    classDirectories.setFrom(
+            filteredClassDirs(
+                    classDirectories,
+                    [
+                            "**/CommunicatorApplication*"
+                    ]
+            )
+    )
+    doLast {
+        println("Coverage test report: file://" + dir.get() + "/jacoco/index.html")
+    }
+    finalizedBy(tasks.jacocoTestCoverageVerification)
+}
+
+jacocoTestCoverageVerification {
+    dependsOn(tasks.jacocoTestReport)
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
+        }
+    }
+    classDirectories.setFrom(
+            filteredClassDirs(
+                    classDirectories,
+                    [
+                            "**/CommunicatorApplication*"
+                    ]
+            )
+    )
+}
+
+
