@@ -1,6 +1,70 @@
+app:
+  name: communicator
+  port: 8085
+server:
+  tomcat:
+    basedir: /tmp/tomcat
+    accesslog:
+      directory: logs
+      file-date-format: .yyyy-MM-dd
+      prefix: access-log
+      suffix: .log
+      enabled: true
+      rotate: true
+      rename-on-rotate: true
+      buffered: true
+      request-attributes-enabled: true
+      pattern: '%h %l %u %t "%r" %s %b %D'
+  port: ${app.port}
+  error:
+    include-exception: true
+    include-message: always
+logging:
+  level:
+    ROOT: INFO
+    by.sadovnick.communicator: ${LOG_LEVEL:DEBUG}
+management:
+  info:
+    git:
+      mode: simple
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: ${MANAGEMENT_SERVER:9999}
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    enable:
+      all: false
+      jvm: true
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            request: true
 spring:
   application:
-    name: communicator
+    name: ${app.name}
   config:
     import: optional:file:.env[.properties]
+  banner:
+    location: classpath:banner/banner.txt
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+    parser:
+      allow-comments: true
+    serialization:
+      write-bigdecimal-as-plain: true
+    deserialization:
+      use-big-decimal-for-floats: true
 
