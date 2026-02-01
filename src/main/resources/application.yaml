@@ -101,34 +101,3 @@ spring:
             factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
         temp:
           use_jdbc_metadata_defaults: false
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
