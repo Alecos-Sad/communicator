@@ -86,7 +86,7 @@ spring:
     show-sql: true
     generate-ddl: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     open-in-view: off
     properties:
       hibernate:
@@ -101,3 +101,9 @@ spring:
             factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
         temp:
           use_jdbc_metadata_defaults: false
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog-master.yaml
+    default-schema: ${DB_SCHEMA}
+    user: ${COMMUNICATORDB_USERNAME}
+    password: ${COMMUNICATORDB_PASSWORD}

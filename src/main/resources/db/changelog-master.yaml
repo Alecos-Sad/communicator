@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_001_EXTENSION_UUID_OSSP.yaml
