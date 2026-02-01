@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: communicator
+  config:
+    import: optional:file:.env[.properties]
+
