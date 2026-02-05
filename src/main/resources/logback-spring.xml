@@ -1,0 +1,36 @@
+<configuration>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <version>[ignore]</version>
+                <levelValue>[ignore]</levelValue>
+            </fieldNames>
+            <shortenedLoggerNameLength>30</shortenedLoggerNameLength>
+        </encoder>
+    </appender>
+
+<!--        Раскомментировать при необходимости писать логи в файл для кибаны       -->
+
+<!--    <appender name="jsonFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>/tmp/communicator.log</file>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>/tmp/communicator.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>-->
+<!--            <maxFileSize>10MB</maxFileSize>-->
+<!--            <totalSizeCap>200MB</totalSizeCap>-->
+<!--            <maxHistory>2</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--            <fieldNames>-->
+<!--                <version>[ignore]</version>-->
+<!--                <levelValue>[ignore]</levelValue>-->
+<!--            </fieldNames>-->
+<!--            <shortenedLoggerNameLength>30</shortenedLoggerNameLength>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+    <root level="INFO">
+        <appender-ref ref="consoleAppender"/>
+<!--        <appender-ref ref="jsonFileAppender"/>-->
+    </root>
+
+</configuration>

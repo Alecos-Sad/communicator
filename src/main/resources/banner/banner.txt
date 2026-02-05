@@ -1,0 +1,10 @@
+${AnsiColor.YELLOW}
+  _________  __  _____  _____  ___  ______________ __________  ___
+ / ___/ __ \/  |/  /  |/  / / / / |/ /  _/ ___/ _ /_  __/ __ \/ _ \
+/ /__/ /_/ / /|_/ / /|_/ / /_/ /    // // /__/ __ |/ / / /_/ / , _/
+\___/\____/_/  /_/_/  /_/\____/_/|_/___/\___/_/ |_/_/  \____/_/|_|
+
+${AnsiStyle.NORMAL}
+
+Spring Boot version: ${spring-boot.version}
+Spring Boot version formatted: ${spring-boot.formatted-version}

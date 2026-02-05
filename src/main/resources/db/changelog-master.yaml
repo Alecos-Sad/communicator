@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_001_EXTENSION_UUID_OSSP.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_002_CREATE_APPLICATION_TABLE.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_003_CREATE_DESTINATION_TABLE.yaml

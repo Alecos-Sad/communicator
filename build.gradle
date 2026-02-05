@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.5.10'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'jacoco'
+    id 'checkstyle'
 }
 
 group = 'by.sadovnick'
@@ -13,6 +14,12 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
     }
+}
+
+checkstyle {
+    toolVersion = "10.12.5"
+    configFile = 'checkstyle/checkstyle.xml' as File
+    checkstyleTest.enabled = true
 }
 
 configurations {
@@ -39,8 +46,8 @@ def igniteVersion = '3.1.0'
 def dir = layout.buildDirectory
 
 dependencies {
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
@@ -48,7 +55,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     //config-processor
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-//    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.liquibase:liquibase-core'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
     //lombok
@@ -66,11 +73,8 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     //test block
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:postgresql'
     testImplementation 'io.github.openfeign:feign-mock'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -136,5 +140,3 @@ jacocoTestCoverageVerification {
             )
     )
 }
-
-

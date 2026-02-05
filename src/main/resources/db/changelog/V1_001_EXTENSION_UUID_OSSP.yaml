@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.001.1
+      author: Alexander Sadovnikov
+      runOnChange: false
+      failOnError: false
+      comment: ADD EXTENSION uuid-ossp
+      changes:
+        - sql:
+            sql: CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+      rollback:
+        - sql:
+            sql: DROP EXTENSION IF EXISTS "uuid-ossp";
+
+  - changeSet:
+      id: v1.001.2
+      author: Alexander Sadovnikov
+      failOnError: true
+      comment: CHECK EXTENSION uuid-ossp
+      preConditions:
+        - onFail: HALT
+        - onError: HALT
+        - sqlCheck:
+            expectedResult: "1"
+            sql: SELECT count(*) FROM pg_extension WHERE extname = 'uuid-ossp';
+      changes:
+        - sql:
+            sql: SELECT 1;
