@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: "v1.002.1"
+      author: Alexander Sadovnikov
+      comment: "Add table application"
+      changes:
+        - createTable:
+            tableName: application
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  defaultValueComputed: uuid_generate_v4()
+              - column:
+                  name: client_uuid
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bundle_id
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: platform
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: published
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: default_destination_action
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: deleted_at
+                  type: timestamp
+        - addUniqueConstraint:
+            constraintName: application_unique_constraint
+            tableName: application
+            columnNames: bundle_id, platform

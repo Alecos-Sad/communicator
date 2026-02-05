@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: "v1.003.1"
+      author: Alexander Sadovnikov
+      comment: "Add table destination"
+      changes:
+        - createTable:
+            tableName: destination
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  defaultValueComputed: uuid_generate_v4()
+              - column:
+                  name: client_uuid
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: action
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            constraintName: destination_unique_constraint
+            tableName: destination
+            columnNames: client_uuid, address
