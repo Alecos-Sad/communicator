@@ -8,3 +8,15 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: changelog/V1_003_CREATE_DESTINATION_TABLE.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_004_CREATE_APPLICATION_DESTINATION_TABLE.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_005_CREATE_APPLICATION_INSTANCE_TABLE.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_006_CREATE_INSTANCE_ID_IDP_INFO_TABLE.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: changelog/V1_006_CREATE_INSTANCE_ID_INFO_TABLE.yaml

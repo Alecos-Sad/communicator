@@ -1,11 +1,11 @@
 databaseChangeLog:
   - changeSet:
-      id: "v1.002.1"
+      id: "v1.005.1"
       author: Alexander Sadovnikov
-      comment: "Add table application"
+      comment: "Add table application_instance"
       changes:
         - createTable:
-            tableName: application
+            tableName: application_instance
             columns:
               - column:
                   name: id
@@ -15,28 +15,20 @@ databaseChangeLog:
                     primaryKey: true
                   defaultValueComputed: uuid_generate_v4()
               - column:
-                  name: client_uuid
+                  name: application_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_application
+                    references: application(id)
+                    nullable: false
+              - column:
+                  name: public_key
                   type: varchar
                   constraints:
                     nullable: false
+                    unique: true
               - column:
-                  name: bundle_id
-                  type: varchar
-                  constraints:
-                    nullable: false
-              - column:
-                  name: platform
-                  type: varchar
-                  constraints:
-                    nullable: false
-              - column:
-                  name: published
-                  type: boolean
-                  defaultValueBoolean: false
-                  constraints:
-                    nullable: false
-              - column:
-                  name: default_destination_action
+                  name: fingerprint
                   type: varchar
                   constraints:
                     nullable: false
@@ -46,21 +38,17 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: updated_at
+                  name: last_active_at
                   type: timestamp
               - column:
-                  name: deleted_at
-                  type: timestamp
-              - column:
-                  name: detection_network_mode
+                  name: device_type
                   type: varchar
                   constraints:
                     nullable: false
-                  defaultValue: 'AUTO'
+                  defaultValue: empty
               - column:
-                  name: idp_client_ids
-                  type: varchar
-        - addUniqueConstraint:
-            constraintName: application_unique_constraint
-            tableName: application
-            columnNames: bundle_id, platform
+                  name: blocked
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
