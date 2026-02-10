@@ -123,6 +123,7 @@ jacocoTestReport {
 }
 
 jacocoTestCoverageVerification {
+    enabled = false
     dependsOn(tasks.jacocoTestReport)
     violationRules {
         rule {

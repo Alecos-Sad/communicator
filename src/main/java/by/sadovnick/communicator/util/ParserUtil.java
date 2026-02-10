@@ -1,11 +1,9 @@
 package by.sadovnick.communicator.util;
 
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @UtilityClass
@@ -24,7 +22,10 @@ public class ParserUtil {
         } else {
             Map<String, String> map = new HashMap<>();
             for (String pair : pairs) {
-                String[] keyValuePair = pair.split("=");
+                String[] keyValuePair = pair.split("=", 2);
+                if (keyValuePair.length < 2) {
+                    continue;
+                }
                 map.put(keyValuePair[0].strip(), keyValuePair[1].strip());
             }
             result = map.get("CN");
@@ -36,6 +37,7 @@ public class ParserUtil {
         if (list != null && !list.isEmpty()) {
             return list
                     .stream()
+                    .filter(s -> !StringUtils.isBlank(s))
                     .map(String::strip)
                     .collect(Collectors.joining(","));
         }
