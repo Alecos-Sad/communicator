@@ -1,5 +1,7 @@
 package by.sadovnick.communicator.enums;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Способ определения сети.
  * EXTERNAL - CerberSDK считает, что МП в Internet идет через проксирование SberMAG.
@@ -9,5 +11,18 @@ package by.sadovnick.communicator.enums;
 public enum DetectionNetworkMode {
     EXTERNAL,
     INTERNAL,
-    AUTO
+    AUTO;
+
+    public static DetectionNetworkMode fromString(String value) {
+        if (StringUtils.isBlank(value.strip())) {
+            throw new IllegalArgumentException("Platform value cannot be null or empty");
+        }
+        try {
+            return DetectionNetworkMode.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(
+                    String.format("Unknown platform: %s. Supported values: ANDROID, IOS", value)
+            );
+        }
+    }
 }

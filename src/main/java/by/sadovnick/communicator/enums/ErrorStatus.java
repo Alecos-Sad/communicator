@@ -5,6 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorStatus {
 
+    VALIDATION_ERROR("SM-COMM-2", "dto validation error", Messages.MESSAGE_1),
+
     DATABASE_SQL_ERROR("SM-COMM-26", "Error while insert or update data in database", Messages.MESSAGE_1),
 
     CLIENT_DN_NOT_VALID_104("SM-COMM-104", "ClientDN not valid", Messages.MESSAGE_1),
