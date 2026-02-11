@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: "v1.004.1"
+      author: Alexander Sadovnikov
+      comment: "Add table application_destination"
+      changes:
+        - createTable:
+            tableName: application_destination
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  defaultValueComputed: uuid_generate_v4()
+              - column:
+                  name: application_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_application
+                    references: application(id)
+                    nullable: false
+              - column:
+                  name: destination_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_destination
+                    references: destination(id)
+                    nullable: false
+              - column:
+                  name: action
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rank
+                  type: integer
+                  defaultValueNumeric: "1"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+        - addUniqueConstraint:
+            constraintName: app_dest_unique_constraint
+            tableName: application_destination
+            columnNames: application_id, destination_id

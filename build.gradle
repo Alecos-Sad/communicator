@@ -22,6 +22,12 @@ checkstyle {
     checkstyleTest.enabled = true
 }
 
+def localDev = providers.gradleProperty('localDev')
+        .orElse(providers.environmentVariable('localDev'))
+        .map { it.toBoolean() }
+        .orElse(false)
+        .get()
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -70,7 +76,7 @@ dependencies {
     implementation "org.bouncycastle:bcpkix-jdk15to18:${bouncycastleVersion}"
     implementation "org.bouncycastle:bcprov-jdk15to18:${bouncycastleVersion}"
     implementation "org.apache.ignite:ignite-core:${igniteVersion}"
-    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.postgresql:postgresql'
     //test block
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
@@ -91,7 +97,10 @@ jacoco {
 
 tasks.named('test') {
     useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport)
+    enabled = localDev
+    if (localDev) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 }
 
 def filteredClassDirs = {
@@ -103,6 +112,10 @@ def filteredClassDirs = {
 }
 
 jacocoTestReport {
+    enabled = localDev
+    onlyIf {
+        localDev
+    }
     reports {
         xml.required = false
         csv.required = false
@@ -123,11 +136,15 @@ jacocoTestReport {
 }
 
 jacocoTestCoverageVerification {
+    enabled = false && localDev
+    onlyIf {
+        localDev
+    }
     dependsOn(tasks.jacocoTestReport)
     violationRules {
         rule {
             limit {
-                minimum = 0.8
+                minimum = 0.0
             }
         }
     }

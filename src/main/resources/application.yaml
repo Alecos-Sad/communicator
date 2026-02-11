@@ -23,8 +23,6 @@ logging:
   level:
     ROOT: INFO
     by.sadovnick.communicator: ${LOG_LEVEL}
-    org.hibernate.sql: DEBUG
-    org.hibernate.orm.jdbc.bind: TRACE
 management:
   info:
     git:
@@ -107,3 +105,9 @@ spring:
     default-schema: ${DB_SCHEMA}
     user: ${COMMUNICATORDB_USERNAME}
     password: ${COMMUNICATORDB_PASSWORD}
+app-variables:
+  cert-map:
+    CERT-11: "a64249be-9fdb-4485-aba1-7a5f18db9ab7"
+    CERT-22: "7a299298-dbbb-4c8e-82f6-0ecaf60e2e2d"
+    CERT-33: "d24d91a6-70fe-46bc-a6ff-41158540b3fe"
+  detection-network-mode: ${DETECTION_NETWORK_MODE}

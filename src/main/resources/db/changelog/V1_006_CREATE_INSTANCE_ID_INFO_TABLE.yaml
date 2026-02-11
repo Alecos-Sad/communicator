@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: "v1.006.1"
+      author: Alexander Sadovnikov
+      comment: "Add table instance_id_info"
+      changes:
+        - createTable:
+            tableName: instance_id_info
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  defaultValueComputed: uuid_generate_v4()
+              - column:
+                  name: instance_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bundle_id
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: platform
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cert_login
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_date_cert_login
+                  type: timestamp
+              - column:
+                  name: count_check
+                  type: int
+        - addUniqueConstraint:
+            tableName: instance_id_info
+            columnNames: instance_id, cert_login, bundle_id, platform
+            constraintName: uk_instance_id_info_instance_id_cert_login_bundle_id_platform
