@@ -12,7 +12,7 @@ public class ParserUtilsTest {
 
     @Test
     void getCNFromDNReturnsNullForMalformedEmptyCNSegment() {
-        assertEquals("",ParserUtil.getCNFromDN("CN="));
+        assertEquals("", ParserUtil.getCNFromDN("CN="));
     }
 
     @Test

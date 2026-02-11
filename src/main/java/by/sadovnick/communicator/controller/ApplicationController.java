@@ -2,16 +2,12 @@ package by.sadovnick.communicator.controller;
 
 import by.sadovnick.communicator.dto.ApplicationIdRs;
 import by.sadovnick.communicator.dto.ApplicationRq;
-import by.sadovnick.communicator.enums.JsonLogField;
-import by.sadovnick.communicator.enums.SubSystem;
 import by.sadovnick.communicator.service.v1.ApplicationService;
-import by.sadovnick.communicator.util.RequestUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.logstash.logback.argument.StructuredArguments;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +15,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static by.sadovnick.communicator.enums.JsonLogField.*;
-import static by.sadovnick.communicator.enums.SubSystem.*;
-import static by.sadovnick.communicator.util.RequestUtil.*;
-import static net.logstash.logback.argument.StructuredArguments.*;
+import static by.sadovnick.communicator.enums.SubSystem.ADMIN;
+import static by.sadovnick.communicator.util.RequestUtil.getClientUUID;
+import static by.sadovnick.communicator.util.RequestUtil.getRequestPath;
+import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @RestController
 @RequestMapping(value = "/v1")

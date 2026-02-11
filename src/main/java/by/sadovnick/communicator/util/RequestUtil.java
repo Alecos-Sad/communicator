@@ -31,7 +31,7 @@ public class RequestUtil {
         RequestUtil.requestPath.set(requestPath);
     }
 
-    public static String getRequestPath(){
+    public static String getRequestPath() {
         return requestPath.get();
     }
 

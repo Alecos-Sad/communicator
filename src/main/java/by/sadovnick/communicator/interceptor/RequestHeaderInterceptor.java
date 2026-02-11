@@ -1,6 +1,5 @@
 package by.sadovnick.communicator.interceptor;
 
-import by.sadovnick.communicator.util.RequestUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
