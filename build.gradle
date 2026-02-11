@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.10'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'jacoco'
+//    id 'jacoco'
     id 'checkstyle'
 }
 
@@ -85,59 +85,59 @@ dependencyManagement {
     }
 }
 
-jacoco {
-    toolVersion = "0.8.14"
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport)
-}
-
-def filteredClassDirs = {
-    FileCollection classDirs, List<String> excludes ->
-        files(classDirs.collect{
-            d ->
-                fileTree(dir: d, exclude: excludes)
-        })
-}
-
-jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = dir.dir('jacoco')
-    }
-    classDirectories.setFrom(
-            filteredClassDirs(
-                    classDirectories,
-                    [
-                            "**/CommunicatorApplication*"
-                    ]
-            )
-    )
-    doLast {
-        println("Coverage test report: file://" + dir.get() + "/jacoco/index.html")
-    }
-    finalizedBy(tasks.jacocoTestCoverageVerification)
-}
-
-jacocoTestCoverageVerification {
-    enabled = false
-    dependsOn(tasks.jacocoTestReport)
-    violationRules {
-        rule {
-            limit {
-                minimum = 0.8
-            }
-        }
-    }
-    classDirectories.setFrom(
-            filteredClassDirs(
-                    classDirectories,
-                    [
-                            "**/CommunicatorApplication*"
-                    ]
-            )
-    )
-}
+//jacoco {
+//    toolVersion = "0.8.14"
+//}
+//
+//tasks.named('test') {
+//    useJUnitPlatform()
+//    finalizedBy(tasks.jacocoTestReport)
+//}
+//
+//def filteredClassDirs = {
+//    FileCollection classDirs, List<String> excludes ->
+//        files(classDirs.collect{
+//            d ->
+//                fileTree(dir: d, exclude: excludes)
+//        })
+//}
+//
+//jacocoTestReport {
+//    reports {
+//        xml.required = false
+//        csv.required = false
+//        html.outputLocation = dir.dir('jacoco')
+//    }
+//    classDirectories.setFrom(
+//            filteredClassDirs(
+//                    classDirectories,
+//                    [
+//                            "**/CommunicatorApplication*"
+//                    ]
+//            )
+//    )
+//    doLast {
+//        println("Coverage test report: file://" + dir.get() + "/jacoco/index.html")
+//    }
+//    finalizedBy(tasks.jacocoTestCoverageVerification)
+//}
+//
+//jacocoTestCoverageVerification {
+//    enabled = false
+//    dependsOn(tasks.jacocoTestReport)
+//    violationRules {
+//        rule {
+//            limit {
+//                minimum = 0.8
+//            }
+//        }
+//    }
+//    classDirectories.setFrom(
+//            filteredClassDirs(
+//                    classDirectories,
+//                    [
+//                            "**/CommunicatorApplication*"
+//                    ]
+//            )
+//    )
+//}

@@ -5,5 +5,5 @@ import by.sadovnick.communicator.dto.ApplicationRq;
 
 public interface ApplicationService {
 
-    ApplicationIdRs create(final ApplicationRq applicationRq, final String clientKey);
+    ApplicationIdRs create(final ApplicationRq applicationRq, final String clientDN);
 }

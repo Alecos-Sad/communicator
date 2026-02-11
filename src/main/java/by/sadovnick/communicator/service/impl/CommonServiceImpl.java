@@ -10,8 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
-import static by.sadovnick.communicator.enums.ErrorStatus.CLIENT_DN_NOT_VALID_104;
-import static by.sadovnick.communicator.enums.ErrorStatus.CLIENT_UUID_IS_ABSENT_101;
+import static by.sadovnick.communicator.enums.ErrorStatus.*;
 import static by.sadovnick.communicator.enums.JsonLogField.*;
 import static by.sadovnick.communicator.enums.SubSystem.ADMIN;
 import static by.sadovnick.communicator.util.RequestUtil.getRequestPath;
@@ -29,7 +28,19 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public String parseCnFromDnAdminAPI(String clientDn) {
         if (isBlank(clientDn)) {
-            return "";
+            log.error(CLIENT_DN_IS_ABSENT_105.name(),
+                    kv(CLIENT_DN.getDescription(), clientDn),
+                    kv(SUB_SYSTEM.getDescription(), ADMIN.getDescription()),
+                    kv(SERVLET_PATH.getDescription(), getRequestPath())
+            );
+            throw new BusinessLogicException(
+                    new ErrorResponse(
+                            CLIENT_DN_IS_ABSENT_105.getCode(),
+                            CLIENT_DN_IS_ABSENT_105.getDescription(),
+                            CLIENT_DN_IS_ABSENT_105.getMessage(),
+                            MDC.get(TRACE_ID.getDescription())
+                    )
+            );
         }
         log.debug("Try to parse clientDN",
                 kv(CLIENT_DN.getDescription(), clientDn),
