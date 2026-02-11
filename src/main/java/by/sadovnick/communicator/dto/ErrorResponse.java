@@ -11,18 +11,27 @@ import java.time.Instant;
 @AllArgsConstructor
 public class ErrorResponse {
 
+    /**
+     * Код ошибки
+     */
     @Pattern(regexp = ".*")
     @Size(max = 255)
     private String code;
-
+    /**
+     * Описание ошибки
+     */
     @Pattern(regexp = ".*")
     @Size(max = 255)
     private String description;
-
+    /**
+     * Сообщение тела ошибки
+     */
     @Pattern(regexp = ".*")
     @Size(max = 255)
     private String message;
-
+    /**
+     * Трассировка ошибки
+     */
     @Pattern(regexp = ".*")
     @Size(max = 255)
     private String traceId;
