@@ -1,5 +1,6 @@
 package by.sadovnick.communicator.config;
 
+import by.sadovnick.communicator.enums.DetectionNetworkMode;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,10 +21,9 @@ public class ProjectProperties {
     @NotNull(message = "Необходимо заполнить справочник сертификатов")
     private Map<String, String> certMap;
 
-    //TODO попробовать сразу enum
     /**
      * Режим сети
      */
     @NotNull(message = "Необходимо указать режим сети")
-    private String detectionNetworkMode;
+    private DetectionNetworkMode detectionNetworkMode;
 }
