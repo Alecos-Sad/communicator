@@ -14,11 +14,11 @@ public enum DetectionNetworkMode {
     AUTO;
 
     public static DetectionNetworkMode fromString(String value) {
-        if (StringUtils.isBlank(value.strip())) {
+        if (StringUtils.isBlank(value)) {
             throw new IllegalArgumentException("Platform value cannot be null or empty");
         }
         try {
-            return DetectionNetworkMode.valueOf(value.toUpperCase());
+            return DetectionNetworkMode.valueOf(value.strip().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(
                     String.format("Unknown platform: %s. Supported values: ANDROID, IOS", value)

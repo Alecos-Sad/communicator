@@ -10,11 +10,11 @@ public enum Platform {
     IOS;
 
     public static Platform fromString(String value) {
-        if (StringUtils.isBlank(value.trim())) {
+        if (StringUtils.isBlank(value)) {
             throw new IllegalArgumentException("Platform value cannot be null or empty");
         }
         try {
-            return Platform.valueOf(value.toUpperCase());
+            return Platform.valueOf(value.strip().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(
                     String.format("Unknown platform: %s. Supported values: ANDROID, IOS", value)
