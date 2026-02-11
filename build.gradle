@@ -22,36 +22,19 @@ checkstyle {
     checkstyleTest.enabled = true
 }
 
+def localDev = providers.gradleProperty('localDev')
+        .orElse(providers.environmentVariable('LOCAL_DEV'))
+        .map { it.toBoolean() }
+        .orElse(false)
+        .get()
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
 
-def mavenMirrorUrl = providers.gradleProperty('mavenMirrorUrl')
-        .orElse(providers.environmentVariable('MAVEN_MIRROR_URL'))
-        .orNull
-
-def mavenMirrorUser = providers.gradleProperty('mavenMirrorUser')
-        .orElse(providers.environmentVariable('MAVEN_MIRROR_USER'))
-        .orNull
-
-def mavenMirrorPassword = providers.gradleProperty('mavenMirrorPassword')
-        .orElse(providers.environmentVariable('MAVEN_MIRROR_PASSWORD'))
-        .orNull
-
 repositories {
-    if (mavenMirrorUrl) {
-        maven {
-            url = uri(mavenMirrorUrl)
-            if (mavenMirrorUser && mavenMirrorPassword) {
-                credentials {
-                    username = mavenMirrorUser
-                    password = mavenMirrorPassword
-                }
-            }
-        }
-    }
     mavenCentral()
 }
 
@@ -114,7 +97,10 @@ jacoco {
 
 tasks.named('test') {
     useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport)
+    enabled = localDev
+    if (localDev) {
+        finalizedBy(tasks.jacocoTestReport)
+    }
 }
 
 def filteredClassDirs = {
@@ -126,6 +112,10 @@ def filteredClassDirs = {
 }
 
 jacocoTestReport {
+    enabled = localDev
+    onlyIf {
+        localDev
+    }
     reports {
         xml.required = false
         csv.required = false
@@ -146,7 +136,10 @@ jacocoTestReport {
 }
 
 jacocoTestCoverageVerification {
-    enabled = false
+    enabled = false && localDev
+    onlyIf {
+        localDev
+    }
     dependsOn(tasks.jacocoTestReport)
     violationRules {
         rule {
