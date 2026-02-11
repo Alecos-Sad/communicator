@@ -51,12 +51,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         applicationEntity.setPlatform(applicationRq.getPlatform());
         applicationEntity.setDefaultDestinationAction(applicationRq.getDefaultDestinationAction());
         applicationEntity.setCreatedAt(Instant.now());
-        //TODO обработка IllegalArgumentException
-        applicationEntity.setDetectionNetworkMode(
-                DetectionNetworkMode.fromString(
-                        projectProperties.getDetectionNetworkMode()
-                )
-        );
+        applicationEntity.setDetectionNetworkMode(projectProperties.getDetectionNetworkMode());
         applicationEntity.setIdpClientIds(
                 ParserUtil.parseListToStringWithOutBrackets(applicationRq.getIdpClientIds())
         );
