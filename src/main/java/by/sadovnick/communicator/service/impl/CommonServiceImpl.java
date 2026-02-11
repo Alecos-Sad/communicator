@@ -14,6 +14,7 @@ import static by.sadovnick.communicator.enums.ErrorStatus.*;
 import static by.sadovnick.communicator.enums.JsonLogField.*;
 import static by.sadovnick.communicator.enums.SubSystem.ADMIN;
 import static by.sadovnick.communicator.util.RequestUtil.getRequestPath;
+import static by.sadovnick.communicator.util.RequestUtil.setClientUUID;
 import static io.micrometer.common.util.StringUtils.isBlank;
 import static java.lang.String.*;
 import static net.logstash.logback.argument.StructuredArguments.kv;
@@ -84,6 +85,7 @@ public class CommonServiceImpl implements CommonService {
                     )
             );
         }
+        setClientUUID(clientUUID);
         return clientUUID;
     }
 }
