@@ -16,7 +16,7 @@ public class RequestUtil {
     }
 
     public static Map<String, String> getHeaders() {
-        return getHeaders();
+        return headers.get();
     }
 
     public static void setClientUUID(String clientUUID) {

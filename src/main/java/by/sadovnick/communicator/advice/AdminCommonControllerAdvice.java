@@ -31,7 +31,7 @@ public class AdminCommonControllerAdvice {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-    @ExceptionHandler(IllegalStateException.class)
+    @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<ErrorResponse> handleIllegalArgumentException(final IllegalArgumentException e) {

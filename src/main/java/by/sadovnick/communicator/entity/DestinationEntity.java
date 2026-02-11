@@ -32,6 +32,7 @@ public class DestinationEntity extends BaseEntity{
      * Тип подключения
      */
     @Column(name = "action", nullable = false)
+    @Enumerated(EnumType.STRING)
     private DestinationAction action = DestinationAction.NOACTION;
     /**
      * Время создания сущности
