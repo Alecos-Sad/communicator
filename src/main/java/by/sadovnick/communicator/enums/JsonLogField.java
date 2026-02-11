@@ -10,10 +10,16 @@ public enum JsonLogField {
     TRACE_ID("traceId"),
     CN("cn"),
     ERROR("error"),
+    ERROR_TYPE("errorType"),
     HTTP_METHOD("httpMethod"),
     REQUEST("request"),
     RESPONSE("response"),
-    CLIENT_UUID("clientUUID");
+    CLIENT_UUID("clientUUID"),
+    REQUEST_PATH("requestPath"),
+    SQL_STATE("sqlState"),
+    CONSTRAINT("constraint"),
+    TABLE("table"),
+    DETAIL("detail");
 
     private final String description;
 

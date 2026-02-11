@@ -23,7 +23,7 @@ checkstyle {
 }
 
 def localDev = providers.gradleProperty('localDev')
-        .orElse(providers.environmentVariable('LOCAL_DEV'))
+        .orElse(providers.environmentVariable('localDev'))
         .map { it.toBoolean() }
         .orElse(false)
         .get()
@@ -76,7 +76,7 @@ dependencies {
     implementation "org.bouncycastle:bcpkix-jdk15to18:${bouncycastleVersion}"
     implementation "org.bouncycastle:bcprov-jdk15to18:${bouncycastleVersion}"
     implementation "org.apache.ignite:ignite-core:${igniteVersion}"
-    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.postgresql:postgresql'
     //test block
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
