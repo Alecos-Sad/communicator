@@ -85,6 +85,7 @@ dependencies {
     testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock'
     testImplementation 'io.github.openfeign:feign-mock'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 dependencyManagement {
@@ -127,6 +128,14 @@ jacocoTestReport {
             filteredClassDirs(
                     classDirectories,
                     [
+                            "**/advice/*",
+                            "**/config/*",
+                            "**/dto/*",
+                            "**/entity/*",
+                            "**/enums/*",
+                            "**/exception/*",
+                            "**/interceptor/*",
+                            "**/repository/*",
                             "**/CommunicatorApplication*"
                     ]
             )

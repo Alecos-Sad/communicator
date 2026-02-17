@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class ParserUtil {
 
-    //TODO оптимизация и тесты
     public static String getCNFromDN(String clientDN) {
         List<String> pairs = Arrays
                 .stream(clientDN.strip().split(","))
@@ -23,9 +22,6 @@ public class ParserUtil {
             Map<String, String> map = new HashMap<>();
             for (String pair : pairs) {
                 String[] keyValuePair = pair.split("=", 2);
-                if (keyValuePair.length < 2) {
-                    continue;
-                }
                 map.put(keyValuePair[0].strip(), keyValuePair[1].strip());
             }
             result = map.get("CN");
