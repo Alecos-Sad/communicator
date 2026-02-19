@@ -1,4 +1,4 @@
-package by.sadovnick.communicator.service;
+package by.sadovnick.communicator.service.projectprop;
 
 public interface ProjectPropertiesService {
 

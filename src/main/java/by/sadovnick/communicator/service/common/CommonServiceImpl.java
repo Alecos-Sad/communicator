@@ -2,7 +2,7 @@ package by.sadovnick.communicator.service.common;
 
 import by.sadovnick.communicator.dto.ErrorResponse;
 import by.sadovnick.communicator.exception.BusinessLogicException;
-import by.sadovnick.communicator.service.ProjectPropertiesService;
+import by.sadovnick.communicator.service.projectprop.ProjectPropertiesService;
 import by.sadovnick.communicator.util.ParserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
