@@ -1,8 +1,7 @@
-package by.sadovnick.communicator.service.impl;
+package by.sadovnick.communicator.service.common;
 
 import by.sadovnick.communicator.dto.ErrorResponse;
 import by.sadovnick.communicator.exception.BusinessLogicException;
-import by.sadovnick.communicator.service.CommonService;
 import by.sadovnick.communicator.service.ProjectPropertiesService;
 import by.sadovnick.communicator.util.ParserUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +28,17 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public String parseCnFromDnAdminAPI(String clientDn) {
         if (isBlank(clientDn)) {
-            log.error(CLIENT_DN_IS_ABSENT_105.name(),
+            log.error(CLIENT_DN_IS_ABSENT_112.name(),
+                    kv(ERROR.getDescription(), CLIENT_DN_IS_ABSENT_112.getDescription()),
                     kv(CLIENT_DN.getDescription(), clientDn),
                     kv(SUB_SYSTEM.getDescription(), ADMIN.getDescription()),
                     kv(SERVLET_PATH.getDescription(), getRequestPath())
             );
             throw new BusinessLogicException(
                     new ErrorResponse(
-                            CLIENT_DN_IS_ABSENT_105.getCode(),
-                            CLIENT_DN_IS_ABSENT_105.getDescription(),
-                            CLIENT_DN_IS_ABSENT_105.getMessage(),
+                            CLIENT_DN_IS_ABSENT_112.getCode(),
+                            CLIENT_DN_IS_ABSENT_112.getDescription(),
+                            CLIENT_DN_IS_ABSENT_112.getMessage(),
                             MDC.get(TRACE_ID.getDescription())
                     )
             );
@@ -51,6 +51,7 @@ public class CommonServiceImpl implements CommonService {
         String cn = ParserUtil.getCNFromDN(clientDn);
         if (isBlank(cn)) {
             log.error(CLIENT_DN_NOT_VALID_104.name(),
+                    kv(ERROR.getDescription(), String.format(CLIENT_DN_NOT_VALID_104.getDescription(), clientDn)),
                     kv(CLIENT_DN.getDescription(), clientDn),
                     kv(SUB_SYSTEM.getDescription(), ADMIN.getDescription()),
                     kv(SERVLET_PATH.getDescription(), getRequestPath())

@@ -8,7 +8,7 @@ import by.sadovnick.communicator.entity.ApplicationEntity;
 import by.sadovnick.communicator.exception.BusinessLogicException;
 import by.sadovnick.communicator.mapper.ApplicationMapper;
 import by.sadovnick.communicator.repository.ApplicationRepository;
-import by.sadovnick.communicator.service.CommonService;
+import by.sadovnick.communicator.service.common.CommonService;
 import by.sadovnick.communicator.service.v1.ApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         String clientUUID = commonService.getClientUUIDAdminAPI(cn);
         throwExceptionIfApplicationIsExistsButDeleted(clientUUID, applicationRq);
         ApplicationEntity applicationEntity =
-                applicationMapper.toApplicationEntity(
+                applicationMapper.toEntity(
                         applicationRq,
                         clientUUID,
                         projectProperties.getDetectionNetworkMode()

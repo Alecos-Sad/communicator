@@ -6,6 +6,7 @@ import by.sadovnick.communicator.enums.DetectionNetworkMode;
 import by.sadovnick.communicator.util.ParserUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.time.Instant;
 
@@ -13,17 +14,14 @@ import java.time.Instant;
         imports = {
                 Instant.class,
                 ParserUtil.class
-        })
+        },
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
+)
 public interface ApplicationMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "deletedAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "published", ignore = true)
-    @Mapping(target = "applicationDestinationEntityList", ignore = true)
     @Mapping(target = "createdAt", expression = "java(Instant.now())")
     @Mapping(target = "idpClientIds", expression = "java(ParserUtil.parseListToStringWithOutBrackets(applicationRq.getIdpClientIds()))")
-    ApplicationEntity toApplicationEntity(
+    ApplicationEntity toEntity(
             ApplicationRq applicationRq,
             String clientUUID,
             DetectionNetworkMode detectionNetworkMode

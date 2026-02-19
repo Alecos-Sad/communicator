@@ -10,8 +10,8 @@ public enum ErrorStatus {
     DATABASE_SQL_ERROR("SM-COMM-26", "Error while insert or update data in database", Messages.MESSAGE_1),
 
     CLIENT_UUID_IS_ABSENT_101("SM-COMM-101", "Client UUID is absent for cn=%s", Messages.MESSAGE_1),
-    CLIENT_DN_NOT_VALID_104("SM-COMM-104", "ClientDN not valid. Check X-Cert-DN header", Messages.MESSAGE_1),
-    CLIENT_DN_IS_ABSENT_105("SM-COMM-105", "ClientDN is absent. Check X-Cert-DN header", Messages.MESSAGE_1),
+    CLIENT_DN_NOT_VALID_104("SM-COMM-104", "ClientDN=%s not valid. Check X-Cert-DN header", Messages.MESSAGE_1),
+    CLIENT_DN_IS_ABSENT_112("SM-COMM-105", "ClientDN is absent. Check X-Cert-DN header", Messages.MESSAGE_1),
 
 
     APPLICATION_WAS_DELETED_201("SM-COM-201", "Application with bundleId=%s for platform,=%s was deleted", Messages.MESSAGE_1);
